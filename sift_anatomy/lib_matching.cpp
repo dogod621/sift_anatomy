@@ -7,16 +7,16 @@ Version 20140911 (September 11th, 2014)
 
 == Patent Warning and License =================================================
 
-The SIFT method is patented 
+The SIFT method is patented
 
-    [3] "Method and apparatus for identifying scale invariant features
-      in an image."
-        David G. Lowe
-        Patent number: 6711293
-        Filing date: Mar 6, 2000
-        Issue date: Mar 23, 2004
-        Application number: 09/519,89
-  
+	[3] "Method and apparatus for identifying scale invariant features
+	  in an image."
+		David G. Lowe
+		Patent number: 6711293
+		Filing date: Mar 6, 2000
+		Issue date: Mar 23, 2004
+		Application number: 09/519,89
+
  These source codes are made available for the exclusive aim of serving as
  scientific tool to verify the soundness and completeness of the algorithm
  description. Compilation, execution and redistribution of this file may
@@ -46,123 +46,124 @@ this program. If not, see
  * @author Ives Rey-Otero <ives.rey-otero@cmla.ens-cachan.fr>
  */
 
+
 #include "sift_anatomy/lib_matching.hpp"
-#include "sift_anatomy/lib_util.hpp"
 #include "sift_anatomy/lib_keypoint.hpp"
 
+
 static void compute_keypoints_distance(float* dist,
-                                       const struct sift_keypoints *k1,
-                                       const struct sift_keypoints *k2)
+	const struct sift_keypoints* k1,
+	const struct sift_keypoints* k2)
 {
-    int n_hist = k1->list[0]->n_hist;
-    int n_ori  = k1->list[0]->n_ori;
-    int dim = n_hist*n_hist*n_ori;
-    int n1 = k1->size;
-    int n2 = k2->size;
-    for(int i = 0; i < n1; i++){
-        const float * v1 =  k1->list[i]->descr;
-        for(int j = 0; j < n2; j++){
-            const float * v2 =  k2->list[j]->descr;
-            float d = euclidean_distance(v1, v2, dim);
-            dist[i*n2+j] = d;
-        }
-    }
+	int n_hist = k1->list[0]->n_hist;
+	int n_ori = k1->list[0]->n_ori;
+	int dim = n_hist * n_hist * n_ori;
+	int n1 = k1->size;
+	int n2 = k2->size;
+	for (int i = 0; i < n1; i++) {
+		const float* v1 = k1->list[i]->descr;
+		for (int j = 0; j < n2; j++) {
+			const float* v2 = k2->list[j]->descr;
+			float d = euclidean_distance(v1, v2, dim);
+			dist[i * n2 + j] = d;
+		}
+	}
 }
 
 
 static void find_the_two_nearest_keys(const float* dist, int n1, int n2,
-                                     int* indexA, int* indexB,
-                                     float* distA, float* distB)
+	int* indexA, int* indexB,
+	float* distA, float* distB)
 {
-    for(int i = 0; i < n1; i++){
-        int iA, iB;
-        float dA, dB;
-        find_array_two_min(&dist[i*n2], n2, &dA, &dB, &iA, &iB);
-        indexA[i] = iA;
-        indexB[i] = iB;
-        distA[i] = dA;
-        distB[i] = dB;
-    }
+	for (int i = 0; i < n1; i++) {
+		int iA, iB;
+		float dA, dB;
+		find_array_two_min(&dist[i * n2], n2, &dA, &dB, &iA, &iB);
+		indexA[i] = iA;
+		indexB[i] = iB;
+		distA[i] = dA;
+		distB[i] = dB;
+	}
 }
 
-void matching(struct sift_keypoints *k1,
-              struct sift_keypoints *k2,
-              struct sift_keypoints *out_k1,
-              struct sift_keypoints *out_k2A,
-              struct sift_keypoints *out_k2B,
-              float thresh,
-              int flag)
+void matching(struct sift_keypoints* k1,
+	struct sift_keypoints* k2,
+	struct sift_keypoints* out_k1,
+	struct sift_keypoints* out_k2A,
+	struct sift_keypoints* out_k2B,
+	float thresh,
+	int flag)
 {
-    int n1 = k1->size;
-    int n2 = k2->size;
+	int n1 = k1->size;
+	int n2 = k2->size;
 
-    float* dist  = xmalloc<float>(n1*n2);
-    float* distA = xmalloc<float>(n1);
-    float* distB = xmalloc<float>(n1);
-    int* indexA  = xmalloc<int>(n1);
-    int* indexB  = xmalloc<int>(n1);
+	float* dist = xmalloc<float>(n1 * n2);
+	float* distA = xmalloc<float>(n1);
+	float* distB = xmalloc<float>(n1);
+	int* indexA = xmalloc<int>(n1);
+	int* indexB = xmalloc<int>(n1);
 
-    compute_keypoints_distance(dist, k1, k2);
-    find_the_two_nearest_keys(dist, n1, n2, indexA, indexB, distA, distB);
+	compute_keypoints_distance(dist, k1, k2);
+	find_the_two_nearest_keys(dist, n1, n2, indexA, indexB, distA, distB);
 
-    int j = 0;
-    for(int i = 0; i < n1; i++){
-        float val;
-        val = (flag == 1 ? distA[i]/distB[i] : distA[i]);
-        if (val < thresh){
-            int iA = indexA[i];
-            int iB = indexB[i];
-            struct keypoint* k;
-            k = sift_malloc_keypoint_from_model_and_copy(k1->list[i]);
-            sift_add_keypoint_to_list(k, out_k1);
-            k = sift_malloc_keypoint_from_model_and_copy(k2->list[iA]);
-            sift_add_keypoint_to_list(k, out_k2A);
-            k = sift_malloc_keypoint_from_model_and_copy(k2->list[iB]);
-            sift_add_keypoint_to_list(k, out_k2B);
-            j++;
-        }
-    }
+	int j = 0;
+	for (int i = 0; i < n1; i++) {
+		float val;
+		val = (flag == 1 ? distA[i] / distB[i] : distA[i]);
+		if (val < thresh) {
+			int iA = indexA[i];
+			int iB = indexB[i];
+			struct keypoint* k;
+			k = sift_malloc_keypoint_from_model_and_copy(k1->list[i]);
+			sift_add_keypoint_to_list(k, out_k1);
+			k = sift_malloc_keypoint_from_model_and_copy(k2->list[iA]);
+			sift_add_keypoint_to_list(k, out_k2A);
+			k = sift_malloc_keypoint_from_model_and_copy(k2->list[iB]);
+			sift_add_keypoint_to_list(k, out_k2B);
+			j++;
+		}
+	}
 
-    free(dist);
-    free(indexA);
-    free(indexB);
-    free(distA);
-    free(distB);
+	free(dist);
+	free(indexA);
+	free(indexB);
+	free(distA);
+	free(distB);
 }
 
-void print_pairs(const struct sift_keypoints *k1,
-                 const struct sift_keypoints *k2)
+void print_pairs(const struct sift_keypoints* k1,
+	const struct sift_keypoints* k2)
 {
-    if (k1->size > 0){
-        int n = k1->size;
-        for(int i = 0; i < n ;i++){
-            fprintf_one_keypoint(stdout, k1->list[i], 0, 0, 0);
-            fprintf_one_keypoint(stdout, k2->list[i], 0, 0, 0);
-            fprintf(stdout, "\n");
-        }
-    }
+	if (k1->size > 0) {
+		int n = k1->size;
+		for (int i = 0; i < n; i++) {
+			fprintf_one_keypoint(stdout, k1->list[i], 0, 0, 0);
+			fprintf_one_keypoint(stdout, k2->list[i], 0, 0, 0);
+			fprintf(stdout, "\n");
+		}
+	}
 }
 
 void save_pairs_extra(const char* name,
-                      const struct sift_keypoints *k1,
-                      const struct sift_keypoints *k2A,
-                      const struct sift_keypoints *k2B)
+	const struct sift_keypoints* k1,
+	const struct sift_keypoints* k2A,
+	const struct sift_keypoints* k2B)
 {
-    FILE* f = fopen(name,"w");
-    
-    if (k1->size > 0){
+	FILE* f = fopen(name, "w");
 
-        int n_hist = k1->list[0]->n_hist;
-        int n_ori = k1->list[0]->n_ori;
-        int dim = n_hist*n_hist*n_ori;
-        int n_bins  = k1->list[0]->n_bins;
-        int n = k1->size;
-        for(int i = 0; i < n; i++){
-            fprintf_one_keypoint(f, k1->list[i], dim, n_bins, 2);
-            fprintf_one_keypoint(f, k2A->list[i], dim, n_bins, 2);
-            fprintf_one_keypoint(f, k2B->list[i], dim, n_bins, 2);
-            fprintf(f, "\n");
-        }
-    }
-    fclose(f);
+	if (k1->size > 0) {
+
+		int n_hist = k1->list[0]->n_hist;
+		int n_ori = k1->list[0]->n_ori;
+		int dim = n_hist * n_hist * n_ori;
+		int n_bins = k1->list[0]->n_bins;
+		int n = k1->size;
+		for (int i = 0; i < n; i++) {
+			fprintf_one_keypoint(f, k1->list[i], dim, n_bins, 2);
+			fprintf_one_keypoint(f, k2A->list[i], dim, n_bins, 2);
+			fprintf_one_keypoint(f, k2B->list[i], dim, n_bins, 2);
+			fprintf(f, "\n");
+		}
+	}
+	fclose(f);
 }

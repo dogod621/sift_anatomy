@@ -3,48 +3,31 @@
 #include <iostream>
 #include <cmath>
 
-#ifndef M_PI
-    #define M_PI 3.14159265358979323846
-#endif
-
-#ifndef M_SQRT2
-    #define M_SQRT2 1.41421356237309504880
-#endif
-
-#ifndef M_LN2
-    #define M_LN2 0.693147180559945309417
-#endif
-
 // Allocate memory or abord on failure
 template <typename type>
 type* xmalloc(size_t size)
 {
-    if (size == 0)
-        fprintf(stderr,"xmalloc: zero size");
-    void *p = malloc(size*sizeof(type));
-    if (!p)
-    {
-        double sm = size / (0x100000 * 1.0);
-        fprintf(stderr,"xmalloc: out of memory when requesting "
-                "%zu bytes (%gMB)",//:\"%s\"",
-                size, sm);//, strerror(errno));
-    }
-    return (type*)p;
+	if (size == 0)
+		fprintf(stderr, "xmalloc: zero size");
+	void* p = malloc(size * sizeof(type));
+	if (!p)
+	{
+		double sm = size / (0x100000 * 1.0);
+		fprintf(stderr, "xmalloc: out of memory when requesting "
+			"%zu bytes (%gMB)",//:\"%s\"",
+			size, sm);//, strerror(errno));
+	}
+	return (type*)p;
 }
 
 // Reallocate memory of abort on failure
 template <typename type>
 type* xrealloc(type* p, size_t size)
 {
-    type *r = (type*)realloc(p, size*sizeof(type));
-    if (!r) fprintf(stderr,"realloc failed");
-    return r;
+	type* r = (type*)realloc(p, size * sizeof(type));
+	if (!r) fprintf(stderr, "realloc failed");
+	return r;
 }
-
-void* xmalloc(size_t size);
-
-// Reallocate memory of abort on failure
-void* xrealloc(void* p, size_t size);
 
 // Free memory allocated by xmalloc or xrealloc.
 void xfree(void* p);
@@ -57,7 +40,7 @@ void fatal_error(const char* format, ...);
 void debug(const char* format, ...);
 
 // Linearly rescale input such that its values are in the range [0, 250].
-void linear_conversion(const float *in, float *out, int l);
+void linear_conversion(const float* in, float* out, int l);
 
 // Find the maximum value of an array.
 float array_max(const float* array, int length);
@@ -66,10 +49,10 @@ float array_max(const float* array, int length);
 float array_min(const float* array, int length);
 
 // Find the maximum value of an array.
-float find_array_max(const float* array, int length, int *position);
+float find_array_max(const float* array, int length, int* position);
 
 // Find the minimum value of an array.
-float find_array_min(const float* array, int length, int *position);
+float find_array_min(const float* array, int length, int* position);
 
 // Find the two minimal values in an array.
 void find_array_two_min(const float* array, int length, float* minA, float* minB, int* iA, int* iB);
@@ -87,4 +70,4 @@ float euclidean_distance(const float* a1, const float* a2, int length);
 float modulus(float x, float y);
 
 // Multiply the rotation matric R_alpha with [x,y]^T
-void apply_rotation(float x, float y, float *rx, float *ry, float alpha);
+void apply_rotation(float x, float y, float* rx, float* ry, float alpha);
