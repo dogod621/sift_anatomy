@@ -1,8 +1,7 @@
-#ifndef _LIB_UTIL_H_
-#define _LIB_UTIL_H_ 
+#pragma once
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+#include <cmath>
 
 #ifndef M_PI
     #define M_PI 3.14159265358979323846
@@ -41,8 +40,6 @@ type* xrealloc(type* p, size_t size)
     if (!r) fprintf(stderr,"realloc failed");
     return r;
 }
-
-
 
 void* xmalloc(size_t size);
 
@@ -91,5 +88,3 @@ float modulus(float x, float y);
 
 // Multiply the rotation matric R_alpha with [x,y]^T
 void apply_rotation(float x, float y, float *rx, float *ry, float alpha);
-
-#endif // _LIB_UTIL_H_

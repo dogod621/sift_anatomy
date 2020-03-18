@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 IPOL SIFT
 Copyright (C) 2014, Ives Rey-Otero, CMLA ENS Cachan 
@@ -50,15 +52,9 @@ The SIFT method is patented
  *
  * @author Ives Rey-Otero <ives.rey-otero@cmla.ens-cachan.fr>
  */
-
-
-#ifndef _LIB_SIFT_ANATOMY_H_
-#define _LIB_SIFT_ANATOMY_H_
-
-
-#include "lib_scalespace.h"
-#include "lib_keypoint.h"
-
+ 
+#include "sift_anatomy/lib_scalespace.hpp"
+#include "sift_anatomy/lib_keypoint.hpp"
 
 struct sift_parameters
 {
@@ -90,8 +86,3 @@ void scalespace_compute(struct sift_scalespace* ss,
 void scalespace_compute_gradient(const struct sift_scalespace* scalespace,
                                  struct sift_scalespace* sx,
                                  struct sift_scalespace* sy);
-
-
-
-
-#endif // _LIB_SIFT_ANATOMY_H_

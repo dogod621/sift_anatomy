@@ -58,14 +58,8 @@ this program. If not, see
  */
 
 
-
-
-
-#include <math.h>
-#include "lib_description.h"
-
-
-#include "lib_util.h"
+#include "sift_anatomy/lib_description.hpp"
+#include "sift_anatomy/lib_util.hpp"
 
 #define MAX(i,j) ( (i)<(j) ? (j):(i) )
 #define MIN(i,j) ( (i)<(j) ? (i):(j) )

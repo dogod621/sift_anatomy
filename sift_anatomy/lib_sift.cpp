@@ -59,15 +59,10 @@ The SIFT method is patented
  * @author Ives Rey-Otero <ives.rey-otero@cmla.ens-cachan.fr>
  */
 
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-#include "lib_sift.h"
-#include "lib_sift_anatomy.h"
-#include "lib_keypoint.h"
-#include "lib_util.h"
+#include "sift_anatomy/lib_sift.hpp"
+#include "sift_anatomy/lib_util.hpp"
+#include "sift_anatomy/lib_sift_anatomy.hpp"
+#include "sift_anatomy/lib_keypoint.hpp"
 
 
 static struct sift_keypoints* sift_translate_standard_into_anatomy(const struct sift_keypoint_std* k, int n)

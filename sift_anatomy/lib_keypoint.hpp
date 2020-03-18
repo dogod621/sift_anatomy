@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 IPOL SIFT
 Copyright (C) 2014, Ives Rey-Otero, CMLA ENS Cachan
@@ -58,12 +60,6 @@ this program. If not, see
  *
  * @author Ives Rey-Otero <ives.rey-otero@cmla.ens-cachan.fr>
  */
-
-
-
-
-#ifndef _LIB_KEYPOINT_H_
-#define _LIB_KEYPOINT_H_
 
 
 /** @brief keypoint structure, related to a keypoint
@@ -146,5 +142,3 @@ void sift_read_keypoints(struct sift_keypoints* keys,
 
 // Print a single keypoint
 void fprintf_one_keypoint(FILE* f, const struct keypoint *k, int n_descr, int n_bins, int flag);
-
-#endif // _LIB_KEYPOINT_H_

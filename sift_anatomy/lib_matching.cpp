@@ -46,13 +46,9 @@ this program. If not, see
  * @author Ives Rey-Otero <ives.rey-otero@cmla.ens-cachan.fr>
  */
 
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-#include "lib_keypoint.h"
-#include "lib_matching.h"
-#include "lib_util.h"
+#include "sift_anatomy/lib_matching.hpp"
+#include "sift_anatomy/lib_util.hpp"
+#include "sift_anatomy/lib_keypoint.hpp"
 
 static void compute_keypoints_distance(float* dist,
                                        const struct sift_keypoints *k1,

@@ -64,19 +64,9 @@ this program. If not, see
  */
 
 
-
-
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <assert.h>
-#include "lib_discrete.h"
-#include "lib_util.h"
-
-
-
-
-
+#include <cassert>
+#include "sift_anatomy/lib_discrete.hpp"
+#include "sift_anatomy/lib_util.hpp"
 
 
 /** @brief Compute image gradient via symmetric finite difference schemes

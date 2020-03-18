@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 IPOL SIFT
 Copyright (C) 2014, Ives Rey-Otero, CMLA ENS Cachan
@@ -59,10 +61,6 @@ this program. If not, see
  * @author Ives Rey-Otero <ives.rey-otero@cmla.ens-cachan.fr>
  */
 
-#ifndef _LIB_DESCRIPTION_H_
-#define _LIB_DESCRIPTION_H_
-
-
 void sift_accumulate_orientation_histogram(float x_key,
                                            float y_key,
                                            float sigma_key,
@@ -98,5 +96,3 @@ void sift_extract_feature_vector(float x_key,
                                 float* descr);
 
 void sift_threshold_and_quantize_feature_vector(float* descr, int n, float threshold);
-
-#endif // _LIB_DESCRIPTION_H_

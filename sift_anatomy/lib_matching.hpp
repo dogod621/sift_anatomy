@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 IPOL SIFT
 Copyright (C) 2014, Ives Rey-Otero, CMLA ENS Cachan
@@ -45,8 +47,6 @@ this program. If not, see
  *
  * @author Ives Rey-Otero <ives.rey-otero@cmla.ens-cachan.fr>
  */
-#ifndef _LIB_MATCHING_H_
-#define _LIB_MATCHING_H_
 
 void matching(struct sift_keypoints *k1,
               struct sift_keypoints *k2,
@@ -64,4 +64,3 @@ void save_pairs_extra(const char* name,
                       const struct sift_keypoints *k2A,
                       const struct sift_keypoints *k2B);
 
-#endif

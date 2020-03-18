@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 IPOL SIFT
 Copyright (C) 2014, Ives Rey-Otero, CMLA ENS Cachan 
@@ -58,13 +60,6 @@ The SIFT method is patented
  */
 
 
-
-#ifndef _LIB_SIFT_H_
-#define _LIB_SIFT_H_
-#include <stdio.h>
-
-
-
 /** @brief the SIFT keypoint structure
  *
  * contains the position and orientation of the keypoint and the 128 descriptor from the original SIFT method.
@@ -121,5 +116,3 @@ struct sift_keypoint_std *sift_read_keyslocation_from_file(char *filename, int *
 
 void sift_write_to_file(const char *filename, const struct sift_keypoint_std *k, int n);
 void fprintf_keypoint_std(FILE* f, const struct sift_keypoint_std* k, int n);
-
-#endif

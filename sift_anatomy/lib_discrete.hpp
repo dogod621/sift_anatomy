@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 IPOL SIFT
 Copyright (C) 2014, Ives Rey-Otero, CMLA ENS Cachan 
@@ -64,14 +66,6 @@ this program. If not, see
  */
 
 
-
-#ifndef _LIB_DISCRETE_H_
-#define _LIB_DISCRETE_H_
-
-
-
-
-
 /** @brief Discrete Gaussian convolution on image
  * 
  *   Applies in each direction monodimensional sampled Gaussian kernel and
@@ -128,6 +122,3 @@ void sift_oversample_bilin(const float* in , int wi,  int hi,
                       float* out, int wo, int ho,
                       float delta_out);
 
-
-
-#endif  // _LIB_DISCRETE_H_

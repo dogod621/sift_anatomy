@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 IPOL SIFT
 Copyright (C) 2014, Ives Rey-Otero, CMLA ENS Cachan 
@@ -51,12 +53,6 @@ this program. If not, see
 */
 
 
-
-#ifndef _LIB_SCALESPACE_H_
-#define _LIB_SCALESPACE_H_
-
-
-
 /** ***********************  STRUCTURES *************************/
 
 struct octa{
@@ -93,6 +89,3 @@ struct sift_scalespace* sift_malloc_scalespace_lowe(int nOct,  /* # of octaves  
                                          int im_w, int im_h,  /* # input image dimension */
                                          float delta_min,     /* minimal inter-sample distance */
                                          float sigma_min);    /* minimal scale in each octave (relatively to the sampling rate) */
-
-
-#endif

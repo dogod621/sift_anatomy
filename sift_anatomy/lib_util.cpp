@@ -1,8 +1,7 @@
-#include <float.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cfloat>
+#include <cstdarg>
+
+#include "sift_anatomy/lib_util.hpp"
 
 // Free memory allocated by xmalloc or xrealloc.
 void xfree(void* p)

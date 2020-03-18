@@ -60,18 +60,14 @@ The SIFT method is patented
  */
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-/*#include <stdbool.h>*/
-#include <assert.h>
-#include <math.h>
-#include <float.h>
+#include <ctime>
+#include <cassert>
+#include <cfloat>
 
-#include "lib_description.h"
-#include "lib_discrete.h"
-#include "lib_sift_anatomy.h"
-#include "lib_util.h"
+#include "sift_anatomy/lib_sift_anatomy.hpp"
+#include "sift_anatomy/lib_util.hpp"
+#include "sift_anatomy/lib_description.hpp"
+#include "sift_anatomy/lib_discrete.hpp"
 
 #define MAX(i,j) ( (i)<(j) ? (j):(i) )
 #define MIN(i,j) ( (i)<(j) ? (i):(j) )

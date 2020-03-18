@@ -61,16 +61,11 @@ this program. If not, see
 
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <math.h>
+#include <cassert>
 
-#include "lib_discrete.h"
-#include "lib_scalespace.h"
-#include "lib_util.h"
-
-
+#include "sift_anatomy/lib_scalespace.hpp"
+#include "sift_anatomy/lib_util.hpp"
+#include "sift_anatomy/lib_discrete.hpp"
 
 /** ************************************ ALLOCATION *******************************************/
 
