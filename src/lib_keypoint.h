@@ -99,6 +99,7 @@ struct keypoint* sift_malloc_keypoint(int n_ori, int n_hist, int n_bins);
 
 struct keypoint* sift_malloc_keypoint_from_model_and_copy(const struct keypoint* key);
 
+void sift_free_keypoint(struct keypoint* key);
 
 /** @brief list of pointers to keypoint structures (variable size list)
  *      "vector" of keypoint struct (list of variable size)
